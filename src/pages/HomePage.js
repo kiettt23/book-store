@@ -35,7 +35,6 @@ const HomePage = () => {
   } = useSelector((state) => state.books);
 
   const totalPage = 10; // vẫn giữ cứng 10 như code gốc
-  const limit = 10;
 
   // Xử lý click vào book → chuyển route
   const handleClickBook = (bookId) => {
