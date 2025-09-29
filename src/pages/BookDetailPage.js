@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Container, Button, Box, Grid, Stack, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookById } from "../features/bookDetail";
+import { addFavorite } from "../features/favorites";
 
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
@@ -14,13 +15,14 @@ const BookDetailPage = () => {
 
   const { book, loading, error } = useSelector((state) => state.bookDetail);
 
-  // Fetch book detail khi vào trang
+  // Fetch book detail khi load trang
   useEffect(() => {
     if (bookId) {
       dispatch(fetchBookById(bookId));
     }
   }, [dispatch, bookId]);
 
+  // Hiển thị lỗi bằng toast
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -67,7 +69,16 @@ const BookDetailPage = () => {
                 <Typography variant="body1">
                   <strong>Language:</strong> {book.language}
                 </Typography>
-                <Button variant="outlined" sx={{ width: "fit-content" }}>
+                <Button
+                  variant="outlined"
+                  sx={{ width: "fit-content" }}
+                  onClick={() => {
+                    dispatch(addFavorite(book));
+                    toast.success(
+                      "The book has been added to the reading list!"
+                    );
+                  }}
+                >
                   Add to Reading List
                 </Button>
               </Stack>
