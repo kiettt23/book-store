@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { booksReducer } from "../features/books";
+
 const store = configureStore({
   reducer: {
-    // books: booksReducer,
-    // favorites: favoritesReducer,
-    // bookDetail: bookDetailReducer,
+    books: booksReducer,
   },
 });
 
